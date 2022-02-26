@@ -21,6 +21,7 @@ let carrito = [];
 let b_comprar = document.getElementById("b_comprar");
 let lista_carrito = document.getElementById("lista_carrito");
 let carrito_modal = document.getElementById("carrito_Modal");
+let mensaje = document.getElementById("mensaje_finalcompra");
 
 
 const listar = (catalogo) => {
@@ -148,8 +149,8 @@ const ordenar = (array, opc) => {
 
 
 const pagar = (pago, gasto_Total) => {
-  let mensaje = document.getElementById("mensaje_finalcompra");
-  let vuelto;
+  
+  let vuelto =0;
 
   if (pago < gasto_Total){
       mensaje.innerHTML = `<br> <p>Debe introducir un valor mayor o igual a ${gasto_Total}</p>`
@@ -160,7 +161,7 @@ const pagar = (pago, gasto_Total) => {
   } else {
 
         vuelto = pago - gasto_Total;
-        mensaje.innerHTML = `<br> <p>Felicitaciones ha realizado su compra con exito, <h4>el vuelto es $${vuelto}</h4></p>`
+        mensaje.innerHTML = `<br> <p>Felicitaciones ha realizado su compra con exito, <h4>el vuelto es $${vuelto.toFixed(2)}</h4></p>`
     return 
   }
 
@@ -262,7 +263,7 @@ const ver_Carrito = () =>{
 
 const comprar = () =>{
                 let gastos;
-                let iva;
+                let iva ;
                 let total_Iva;
               
 
@@ -295,12 +296,17 @@ const comprar = () =>{
                         pagar(valor_pago.value,total_Iva);
                         lista_carrito.innerHTML = ` `;
                         carrito.splice(0, carrito.length); 
+                       
+                       
                 })
 
                 
                 close.addEventListener("click", ()=>{    
                       comprar_modal.style.display = "none";
-                      lista_carrito.innerHTML = ` `;                  
+                      valor_pago.value ="";
+                      lista_carrito.innerHTML = ` `;  
+                      mensaje.innerHTML = ` `;
+                                      
                 } );
 
 }
